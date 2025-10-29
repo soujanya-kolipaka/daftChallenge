@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -102,41 +67,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="daft-package-challenge---recreating-the-scurvy-dags" class="level1">
 <h1>🎨 DAFT Package Challenge - Recreating the Scurvy DAGs</h1>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>📊 Challenge Requirements In Section <a href="#student-analysis-section">Student Analysis Section</a>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>Recreate all three scurvy DAGs using DAFT programming</li>
-<li>Optional: Demonstrate understanding of DAFT customization options</li>
-</ul>
-</div>
-</div>
 <section id="the-problem-mastering-probabilistic-graphical-models-with-daft" class="level2">
 <h2 class="anchored" data-anchor-id="the-problem-mastering-probabilistic-graphical-models-with-daft">The Problem: Mastering Probabilistic Graphical Models with DAFT</h2>
 <p><strong>Core Question:</strong> How can we use the DAFT package to create visually appealing Directed Acyclic Graphs (DAGs) that tell a compelling data story?</p>
 <p><strong>The Challenge:</strong> You’ll recreate three historical DAGs depicting the fascinating story of how we lost and rediscovered the cure to scurvy. This challenge teaches you to use DAFT for creating professional-quality probabilistic graphical models.</p>
 <p><strong>Our Approach:</strong> We’ll work through the three different understandings of the scurvy data generating process, learning DAFT customization techniques while exploring a crucial moment in medical history.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>⚠️ AI Partnership Required
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This challenge pushes boundaries intentionally. You’ll tackle problems that normally require weeks of study, but with Cursor AI as your partner (and your brain keeping it honest), you can accomplish more than you thought possible.</p>
-<p><strong>The new reality:</strong> The four stages of competence are Ignorance → Awareness → Learning → Mastery. AI lets us produce Mastery-level work while operating primarily in the Awareness stage. I focus on awareness training, you leverage AI for execution, and together we create outputs that used to require years of dedicated study.</p>
-</div>
-</div>
 </section>
 <section id="the-scurvy-story-a-data-science-tragedy" class="level2">
 <h2 class="anchored" data-anchor-id="the-scurvy-story-a-data-science-tragedy">The Scurvy Story: A Data Science Tragedy</h2>
@@ -151,94 +86,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="environment-setup">Environment Setup</h2>
 <p>First, let’s install the DAFT package and set up our environment:</p>
 <div id="setup-environment" class="cell" data-message="false" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install DAFT package (run this in terminal if not already installed)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install 'daft-pgm'</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> daft</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up plotting parameters for better quality</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.dpi'</span>] <span class="op">=</span> <span class="dv">150</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'savefig.dpi'</span>] <span class="op">=</span> <span class="dv">300</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"DAFT package imported successfully!"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Ready to create beautiful DAGs!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DAFT package imported successfully!
 Ready to create beautiful DAGs!</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>💡 Understanding DAFT
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>DAFT (Directed Acyclic Factor Graphs Toolkit)</strong> is a Python package for creating probabilistic graphical models. It’s particularly useful for:</p>
-<ul>
-<li>Creating Directed Acyclic Graphs (DAGs)</li>
-<li>Visualizing causal relationships</li>
-<li>Communicating data generating processes</li>
-<li>Creating publication-quality figures</li>
-</ul>
-<p><strong>Key DAFT Concepts:</strong></p>
-<ul>
-<li><strong>Nodes:</strong> Represent variables or factors</li>
-<li><strong>Edges:</strong> Show relationships between variables</li>
-<li><strong>Plates:</strong> Indicate repeated structures</li>
-<li><strong>Styling:</strong> Customize colors, shapes, and formatting</li>
-</ul>
-</div>
-</div>
 </section>
-<section id="the-three-dags-your-mission" class="level2">
-<h2 class="anchored" data-anchor-id="the-three-dags-your-mission">The Three DAGs: Your Mission</h2>
-<p>Your task is to recreate these three historical DAGs using DAFT, making them visually appealing and professionally formatted.</p>
+<section id="the-three-dags-my-mission" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-dags-my-mission">The Three DAGs: My Mission</h2>
+<p>My task is to recreate these three historical DAGs using DAFT, making them visually appealing and professionally formatted.</p>
 <section id="dag-1-the-1747-understanding-correct-but-incomplete" class="level3">
 <h3 class="anchored" data-anchor-id="dag-1-the-1747-understanding-correct-but-incomplete">DAG 1: The 1747 Understanding (Correct but Incomplete)</h3>
 <p><strong>Historical Context:</strong> In 1747, James Lind discovered that lemons prevent scurvy through a controlled experiment. However, the understanding was incomplete - they knew lemons worked but not why.</p>
-<p><strong>Your Task:</strong> Recreate this DAG showing the relationship between lemons and scurvy prevention.</p>
-<p><strong>Reference Image:</strong> <img src="https://raw.githubusercontent.com/flyaflya/persuasive/642288ea5f79050c05801c3d127084ac0f361a01/images/scurvy2.png" class="img-fluid"></p>
+<p>Recreate this DAG showing the relationship between lemons and scurvy prevention.</p>
 <div id="cell-dag-1-1747" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> daft</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a PGM object for the 1747 understanding</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>pgm <span class="op">=</span> daft.PGM(dpi<span class="op">=</span><span class="dv">150</span>, alternate_style<span class="op">=</span><span class="st">"outer"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add nodes for the 1747 understanding: Lemons → Scurvy Prevention</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"lemons"</span>, <span class="st">"Lemons</span><span class="ch">\n</span><span class="st">Intake"</span>, <span class="dv">1</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="fl">2.5</span>, scale<span class="op">=</span><span class="fl">1.2</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'gold'</span>, </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'darkorange'</span>, </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"scurvy_prevention"</span>, <span class="st">"Scurvy</span><span class="ch">\n</span><span class="st">Prevention"</span>, <span class="fl">3.5</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="fl">2.5</span>, scale<span class="op">=</span><span class="fl">1.2</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'lightgreen'</span>, </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'darkgreen'</span>, </span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add edge showing the causal relationship</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>pgm.add_edge(<span class="st">"lemons"</span>, <span class="st">"scurvy_prevention"</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the DAG</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>pgm.render()</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"1747 Understanding: Lemons Prevent Scurvy</span><span class="ch">\n</span><span class="st">(Correct but incomplete)"</span>, </span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\souja\AppData\Local\Temp\ipykernel_22852\3054205732.py:31: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+<pre><code>C:\Users\souja\AppData\Local\Temp\ipykernel_4132\3054205732.py:31: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -251,55 +114,21 @@ Ready to create beautiful DAGs!</code></pre>
 </div>
 </div>
 </section>
+<section id="dag-1-the-1747-understanding-correct-but-incomplete-1" class="level3">
+<h3 class="anchored" data-anchor-id="dag-1-the-1747-understanding-correct-but-incomplete-1">🍋 <strong>DAG 1: The 1747 Understanding (Correct but Incomplete)</strong></h3>
+<ul>
+<li><strong>Structure:</strong> <code>Lemons Intake → Scurvy Prevention</code> (simple direct relationship)</li>
+<li><strong>Historical Context:</strong> James Lind’s controlled experiment proved lemons prevent scurvy</li>
+<li><strong>Accuracy:</strong> ✅ <strong>Correct</strong> but incomplete - they knew WHAT worked but not WHY</li>
+<li><strong>Visual Design:</strong> Gold lemons node → Light green prevention node</li>
+<li><strong>Significance:</strong> This was groundbreaking empirical evidence but lacked mechanistic understanding</li>
+</ul>
+</section>
 <section id="dag-2-the-misguided-belief-wrong-understanding" class="level3">
 <h3 class="anchored" data-anchor-id="dag-2-the-misguided-belief-wrong-understanding">DAG 2: The Misguided Belief (Wrong Understanding)</h3>
-<p><strong>Historical Context:</strong> Over time, people came to believe it was the acid in lemons that killed bacteria which was causing scurvy. This led to lemons being replaced by limes (cheaper but less Vitamin C) or just using acids like vinegar, causing scurvy to return.</p>
-<p><strong>Your Task:</strong> Recreate this DAG showing the incorrect understanding of the data generating process.</p>
-<p><strong>Reference Image:</strong> <img src="https://raw.githubusercontent.com/flyaflya/persuasive/8aaffd0a3c967d0a26f506232f998130847be3e8/images/scurvy.png" class="img-fluid"></p>
 <div id="cell-dag-2-misguided" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> daft</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a PGM object for the misguided understanding</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>pgm <span class="op">=</span> daft.PGM(dpi<span class="op">=</span><span class="dv">150</span>, alternate_style<span class="op">=</span><span class="st">"outer"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add nodes for the misguided belief: Acid → Bacteria Death → Scurvy Prevention</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"acid"</span>, <span class="st">"Acid</span><span class="ch">\n</span><span class="st">Intake"</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="fl">2.5</span>, scale<span class="op">=</span><span class="fl">1.2</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'lightcoral'</span>, </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'darkred'</span>, </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"bacteria_death"</span>, <span class="st">"Bacteria</span><span class="ch">\n</span><span class="st">Death"</span>, <span class="fl">2.5</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="fl">2.5</span>, scale<span class="op">=</span><span class="fl">1.2</span>,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'lightgray'</span>, </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'darkgray'</span>, </span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"scurvy_prevention"</span>, <span class="st">"Scurvy</span><span class="ch">\n</span><span class="st">Prevention"</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="fl">2.5</span>, scale<span class="op">=</span><span class="fl">1.2</span>,</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'lightyellow'</span>, </span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'goldenrod'</span>, </span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Add edges showing the incorrect causal chain</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>pgm.add_edge(<span class="st">"acid"</span>, <span class="st">"bacteria_death"</span>)</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>pgm.add_edge(<span class="st">"bacteria_death"</span>, <span class="st">"scurvy_prevention"</span>)</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the DAG</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>pgm.render()</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Misguided Belief: Acid Kills Bacteria That Causes Scurvy</span><span class="ch">\n</span><span class="st">(Incorrect understanding)"</span>, </span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\souja\AppData\Local\Temp\ipykernel_22852\3800654691.py:40: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+<pre><code>C:\Users\souja\AppData\Local\Temp\ipykernel_4132\3800654691.py:40: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -312,47 +141,21 @@ Ready to create beautiful DAGs!</code></pre>
 </div>
 </div>
 </section>
+<section id="dag-2-the-misguided-belief-wrong-understanding-1" class="level3">
+<h3 class="anchored" data-anchor-id="dag-2-the-misguided-belief-wrong-understanding-1">🔬 <strong>DAG 2: The Misguided Belief (Wrong Understanding)</strong></h3>
+<ul>
+<li><strong>Structure:</strong> <code>Acid Intake → Bacteria Death → Scurvy Prevention</code> (incorrect causal chain)</li>
+<li><strong>Historical Context:</strong> People wrongly believed acid killed scurvy-causing bacteria</li>
+<li><strong>Accuracy:</strong> ❌ <strong>Incorrect</strong> - led to disastrous substitutions (limes, vinegar)</li>
+<li><strong>Visual Design:</strong> Light coral acid → Gray bacteria death → Light yellow prevention</li>
+<li><strong>Consequence:</strong> This misunderstanding caused scurvy to return and killed thousands of sailors</li>
+</ul>
+</section>
 <section id="dag-3-the-1928-understanding-complete-and-correct" class="level3">
 <h3 class="anchored" data-anchor-id="dag-3-the-1928-understanding-complete-and-correct">DAG 3: The 1928 Understanding (Complete and Correct)</h3>
-<p><strong>Historical Context:</strong> In 1928, the true mechanism was discovered - it was Vitamin C (ascorbic acid) that prevented scurvy. This complete understanding finally explained why lemons worked and why the acid theory was wrong.</p>
-<p><strong>Your Task:</strong> Recreate this DAG showing the complete and correct understanding of the scurvy data generating process.</p>
-<p><strong>Reference Image:</strong> <img src="https://raw.githubusercontent.com/flyaflya/persuasive/main/images/scurvy3.png" class="img-fluid"></p>
 <div id="cell-dag-3-1928" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> daft</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a PGM object for the 1928 understanding</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>pgm <span class="op">=</span> daft.PGM(dpi<span class="op">=</span><span class="dv">150</span>, alternate_style<span class="op">=</span><span class="st">"outer"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add nodes for the 1928 understanding: Vitamin C → Scurvy Prevention</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"vitamin_c"</span>, <span class="st">"Vitamin C</span><span class="ch">\n</span><span class="st">(Ascorbic Acid)"</span>, <span class="dv">1</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="dv">3</span>, scale<span class="op">=</span><span class="fl">1.3</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'mediumseagreen'</span>, </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'darkgreen'</span>, </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">3</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"scurvy_prevention"</span>, <span class="st">"Scurvy</span><span class="ch">\n</span><span class="st">Prevention"</span>, <span class="dv">4</span>, <span class="dv">1</span>, aspect<span class="op">=</span><span class="fl">2.5</span>, scale<span class="op">=</span><span class="fl">1.3</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'lightblue'</span>, </span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'navy'</span>, </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">3</span>,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.9</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add edge showing the correct causal relationship</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>pgm.add_edge(<span class="st">"vitamin_c"</span>, <span class="st">"scurvy_prevention"</span>, </span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{<span class="st">'color'</span>: <span class="st">'darkgreen'</span>, <span class="st">'linewidth'</span>: <span class="dv">3</span>})</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the DAG</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>pgm.render()</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"1928 Understanding: Vitamin C Prevents Scurvy</span><span class="ch">\n</span><span class="st">(Complete and correct mechanism)"</span>, </span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\souja\AppData\Local\Temp\ipykernel_22852\383013814.py:32: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+<pre><code>C:\Users\souja\AppData\Local\Temp\ipykernel_4132\383013814.py:32: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -365,69 +168,28 @@ Ready to create beautiful DAGs!</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="student-analysis-section" class="level2">
-<h2 class="anchored" data-anchor-id="student-analysis-section">Student Requirements Section: Mastering DAFT Visualization</h2>
-<p><strong>Your Task:</strong> Demonstrate your mastery of DAFT through comprehensive recreation of the three scurvy DAGs and thoughtful analysis. The bulk of your grade comes from successfully recreating the DAGs and answering the discussion questions.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>📊 Challenge Requirements
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Complete all DAG recreation sections:</strong></p>
-<ol type="1">
-<li><strong>DAG 1 (1747):</strong> Lemons prevent scurvy - correct but incomplete</li>
-<li><strong>DAG 2 (Misguided):</strong> Acid kills bacteria - wrong understanding<br>
-</li>
-<li><strong>DAG 3 (1928):</strong> Vitamin C prevents scurvy - complete and correct</li>
-<li><strong>Optional:</strong> Add a little professional styling to the DAGs to make them more visually appealing (example: use nice fill colors and/or enclose the text in the ellipse completely).</li>
-</ol>
-</div>
-</div>
-<section id="professional-quality-standards" class="level3">
-<h3 class="anchored" data-anchor-id="professional-quality-standards">Professional Quality Standards</h3>
-<p><strong>Your DAGs should:</strong></p>
+<section id="dag-3-the-1928-understanding-complete-and-correct-1" class="level3">
+<h3 class="anchored" data-anchor-id="dag-3-the-1928-understanding-complete-and-correct-1">💊 <strong>DAG 3: The 1928 Understanding (Complete and Correct)</strong></h3>
 <ul>
-<li>(90% grade): Accurately recreate the reference images</li>
-<li>(100% grade): Add professional colors and possibly play with shapes to make it more visually appealing (example: use nice fill colors and/or enclose the text in the ellipse completely). Erase everything but the story of scurvy and the three DAGs</li>
-<li>Include clear, readable labels</li>
-<li>Demonstrate understanding of DAFT customization options</li>
-<li>Be suitable for a business or academic audience</li>
+<li><strong>Structure:</strong> <code>Vitamin C (Ascorbic Acid) → Scurvy Prevention</code> (true mechanism)</li>
+<li><strong>Historical Context:</strong> Scientific discovery of the actual biochemical mechanism</li>
+<li><strong>Accuracy:</strong> ✅ <strong>Complete and correct</strong> - explains both HOW and WHY lemons work</li>
+<li><strong>Visual Design:</strong> Medium sea green Vitamin C → Light blue prevention (thicker edges)</li>
+<li><strong>Significance:</strong> Finally provided the complete causal understanding needed for reliable prevention</li>
 </ul>
 </section>
-<section id="example-professional-daft-node-styling" class="level3">
-<h3 class="anchored" data-anchor-id="example-professional-daft-node-styling">Example: Professional DAFT Node Styling</h3>
-<p>Here’s an example (see <a href="#fig-example-node" class="quarto-xref">Figure&nbsp;1</a>) of how to create a professionally styled node in DAFT with nice captions and references to the figure:</p>
+</section>
+<section id="dag-summary-the-evolution-of-scurvy-understanding" class="level2">
+<h2 class="anchored" data-anchor-id="dag-summary-the-evolution-of-scurvy-understanding">📊 DAG Summary: The Evolution of Scurvy Understanding</h2>
+<p>The three DAGs we’ve created represent a fascinating journey through the history of scientific understanding. Each tells a different story about how we understood (or misunderstood) the cause and prevention of scurvy.</p>
+<section id="key-insights-from-the-dag-evolution" class="level3">
+<h3 class="anchored" data-anchor-id="key-insights-from-the-dag-evolution">🔬 <strong>Key Insights from the DAG Evolution:</strong></h3>
+<ol type="1">
+<li><strong>DAG 1</strong> shows <strong>empirical knowledge</strong> without mechanistic understanding</li>
+<li><strong>DAG 2</strong> demonstrates how <strong>wrong theories</strong> can be more dangerous than no theory</li>
+<li><strong>DAG 3</strong> represents <strong>complete scientific understanding</strong> with both correlation and causation</li>
+</ol>
 <div id="cell-fig-example-node" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> daft</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a PGM object</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>pgm <span class="op">=</span> daft.PGM(dpi<span class="op">=</span><span class="dv">150</span>, alternate_style<span class="op">=</span><span class="st">"outer"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of a professionally styled node</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"vitamin_c"</span>, <span class="st">"Vitamin C</span><span class="ch">\n</span><span class="st">Intake"</span> <span class="op">+</span> <span class="vs">r" </span><span class="dv">$</span><span class="kw">(</span><span class="vs">X</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>, <span class="dv">1</span>, <span class="dv">1</span>, aspect <span class="op">=</span> <span class="dv">3</span>, scale <span class="op">=</span> <span class="fl">1.1</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'lightgreen'</span>, </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'darkgreen'</span>, </span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.8</span>,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>pgm.add_node(<span class="st">"health"</span>, <span class="st">"Healthiness</span><span class="ch">\n</span><span class="st">"</span><span class="op">+</span><span class="vs">r" </span><span class="dv">$</span><span class="kw">(</span><span class="vs">Y</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>, <span class="fl">3.25</span>, <span class="dv">1</span>, aspect <span class="op">=</span> <span class="dv">3</span>, scale <span class="op">=</span> <span class="fl">1.1</span>,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>             plot_params<span class="op">=</span>{</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'facecolor'</span>: <span class="st">'thistle'</span>, </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'edgecolor'</span>: <span class="st">'purple'</span>, </span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'linewidth'</span>: <span class="dv">2</span>,</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'alpha'</span>: <span class="fl">0.8</span>,</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>             })</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>pgm.add_edge(<span class="st">"vitamin_c"</span>, <span class="st">"health"</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>pgm.render()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-example-node" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -441,85 +203,7 @@ Figure&nbsp;1: Example: Professional DAFT Node Styling
 </div>
 </div>
 </div>
-<p><strong>Key Styling Parameters:</strong></p>
-<ul>
-<li><code>facecolor</code>: Background color of the node</li>
-<li><code>edgecolor</code>: Border color of the node<br>
-</li>
-<li><code>linewidth</code>: Thickness of the border</li>
-<li><code>alpha</code>: Transparency (0.0 to 1.0)</li>
-<li><code>fontsize</code>: Size of text inside the node</li>
-<li><code>aspect</code>: Width/height aspect ratio of the node (default: 1.0)</li>
-<li><code>scale</code>: Height of the node (default: 1.0)</li>
-</ul>
 </section>
-</section>
-<section id="getting-started-repository-setup" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started-repository-setup">Getting Started: Repository Setup 🚀</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>📁 Getting Started
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Step 1:</strong> Create a new repository in your GitHub account named “daftChallenge” (forked from <a href="https://github.com/flyaflya/daftChallenge">https://github.com/flyaflya/daftChallenge</a>)</p>
-<p><strong>Step 2:</strong> Clone your repository locally using Cursor (or VS Code)</p>
-<p><strong>Step 3:</strong> Be sure to install DAFT in your environment: <code>pip install 'daft-pgm'</code>.</p>
-<p><strong>Step 4:</strong> Modify your local copy of this <code>index.qmd</code> file to complete the challenge and get it to be a github pages website.</p>
-</div>
-</div>
-<section id="getting-started-tips" class="level3">
-<h3 class="anchored" data-anchor-id="getting-started-tips">Getting Started Tips</h3>
-</section>
-</section>
-<section id="key-daft-resources" class="level2">
-<h2 class="anchored" data-anchor-id="key-daft-resources">Key DAFT Resources</h2>
-<p><strong>Essential DAFT Documentation:</strong></p>
-<ul>
-<li><a href="https://docs.daft-pgm.org/en/latest/">DAFT Documentation</a></li>
-<li><a href="https://docs.daft-pgm.org/en/latest/examples/">DAFT Examples</a></li>
-<li><a href="https://matplotlib.org/stable/gallery/color/named_colors.html">Matplotlib Colors</a></li>
-</ul>
-<p><strong>Key DAFT Parameters to Explore:</strong></p>
-<ul>
-<li><code>plot_params</code>: Dictionary of matplotlib parameters for styling</li>
-<li><code>aspect</code>: Controls node width (default: 1.0)</li>
-<li><code>scale</code>: Controls node size (default: 1.0)</li>
-<li><code>fontsize</code>: Text size in the node</li>
-<li><code>alternate</code>: Use alternative node shape (True/False)</li>
-</ul>
-</section>
-<section id="grading-rubric" class="level2">
-<h2 class="anchored" data-anchor-id="grading-rubric">Grading Rubric 🎓</h2>
-<p><strong>90% Grade:</strong> Successfully recreate all 3 DAGs with good visual quality.</p>
-<p><strong>100% Grade:</strong> Recreate all 3 DAGs with enhanced quality and visual aesthetics (example: use nice fill colors and/or enclose the text in the ellipse completely).</p>
-</section>
-<section id="submission-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist ✅</h2>
-<p><strong>Minimum Requirements (Required for Any Points):</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Created repository named “daftChallenge” in your GitHub account (forked from <a href="https://github.com/flyaflya/daftChallenge">https://github.com/flyaflya/daftChallenge</a>)</label></li>
-<li><label><input type="checkbox">Cloned repository locally using Cursor (or VS Code)</label></li>
-<li><label><input type="checkbox">Installed DAFT package successfully</label></li>
-<li><label><input type="checkbox">Document rendered to HTML successfully</label></li>
-<li><label><input type="checkbox">HTML files uploaded to your repository</label></li>
-<li><label><input type="checkbox">GitHub Pages enabled and working</label></li>
-<li><label><input type="checkbox">Site accessible at <code>https://[your-username].github.io/daftChallenge/</code></label></li>
-</ul>
-<p><strong>90% Grade Requirements:</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Successfully recreate all 3 DAGs</label></li>
-<li><label><input type="checkbox">Good visual quality with appropriate styling</label></li>
-</ul>
-<p><strong>100% Grade Requirements:</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">All DAG recreations completed with professional quality</label></li>
-<li><label><input type="checkbox">Erase everything but the story of scurvy and the three DAGs (make it a nice concise narrative about scurvy)</label></li>
-</ul>
 </section>
 </section>
 
